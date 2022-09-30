@@ -25,7 +25,7 @@ def saveResults(list_targets, list_alive, list_protected):
     output_folder = Path("output/{}".format(date))
     output_folder.mkdir(parents=True, exist_ok=True)
 
-    # Status (Alive/Suspended/Deleted) of all target accounts
+    # Status of all target accounts
     output_status = output_folder / "status.csv"
     print("Saving the status of the targeted accounts to {}".format(str(output_status.resolve())))
     with output_status.open("w", encoding="utf8") as fp:
@@ -41,6 +41,16 @@ def saveResults(list_targets, list_alive, list_protected):
     with output_accounts.open("w") as fp:
         for user in list_targets:
             fp.write(f"https://twitter.com/{user}\n")
+
+    # List of all protected accounts
+    output_protected = output_folder / "protected.txt"
+    print("Saving list of protected accounts to {}".format(str(output_protected.resolve())))
+    with output_protected.open("w") as fp:
+        fp.write("1\n")
+        for idx, user in enumerate(list_protected):
+            fp.write(f"https://twitter.com/{user}\n")
+            if idx % 50 == 49:
+                fp.write(f"\n{idx+2}\n")
     
     # List of all alive accounts
     output_alive = output_folder / "alive.txt"
@@ -63,7 +73,7 @@ def main():
 
     # Read list of target accounts
     with open("accounts.txt") as fp:
-        list_targets = [x.split("/")[-1].split("(")[0].strip() for x in fp.readlines()]
+        list_targets = [x.split("@")[-1].split("/")[-1].split("(")[0].strip() for x in fp.readlines()]
         list_targets = reorder(list_targets)
     int_count = len(list_targets)
     print(f"Analysing a total number of {int_count} accounts:\n")
