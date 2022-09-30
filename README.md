@@ -1,4 +1,4 @@
-# Twitter Accounts Tracker
+# Twitter Accounts Status Tracker
 
 A simple Python program that tracks the statuses of a list of twitter accounts.
 
