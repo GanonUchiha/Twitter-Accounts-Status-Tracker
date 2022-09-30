@@ -22,3 +22,11 @@ Given a list of twitter accounts, look up their current status (alive, suspended
     https://twitter.com/discord
     ```
 1. run `python src/main.py` in your command prompt, and the results should show up in the `output` folder.
+
+## Environment
+
+This program uses the following packages:
+- python 3.10.4
+- tweepy 4.10.1
+
+Detailed packages and versions can be found in `requirements.txt`. To create an identical virtual environment in Anaconda, use the command `conda create --name <env> --file requirements.txt`.
