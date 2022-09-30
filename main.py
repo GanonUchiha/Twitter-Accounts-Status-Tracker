@@ -1,8 +1,11 @@
 import tweepy
+import json
 
 def api_setup():
-    consumer_key = "EO7VkdrSr18QVKDjZqGvvE85W"
-    consumer_secret = "ZW9KFx9ys23Nha26E6ibd4ZPiohvXCTntwEThaIS2fBiLBHm8G"
+    with open("key.json") as fp:
+        key: dict = json.load(fp)
+    consumer_key = key["consumer_key"]
+    consumer_secret = key["consumer_secret"]
 
     auth = tweepy.AppAuthHandler(consumer_key, consumer_secret)
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
